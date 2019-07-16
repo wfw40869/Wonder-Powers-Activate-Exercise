@@ -1,12 +1,12 @@
-const activateFlightButton = document.querySelector("#activate-flight"),
-    activateMindButton = document.querySelector("#activate-mindreading"),
-    activateXrayButton = document.querySelector("#activate-xray"),
-    flightSection = document.querySelector("#flight"),
+const flightSection = document.querySelector("#flight"),
     mindSection = document.querySelector("#mindreading"),
     xraySection = document.querySelector("#xray"),
     allPowers = document.querySelectorAll(".power"),
     activateAllButton = document.querySelector("#activate-all"),
-    deactivateAllButton = document.querySelector("#deactivate-all")
+    deactivateAllButton = document.querySelector("#deactivate-all"),
+    allButtons = document.querySelectorAll("button")
+
+
 
 
 const activatePower = (power) => {
@@ -22,26 +22,26 @@ const activateAllPowers = (allPowers) => {
 }
 
 const deactivateAllPowers = (allPowers) => {
-    console.log(allPowers)
     allPowers.forEach(power => {
         power.classList.remove("enabled")
         power.classList.add("disabled")
     });
 }
 
-
-
-activateFlightButton.addEventListener("click", () => {
-    activatePower(flightSection)
+allButtons.forEach(button => {
+    button.addEventListener("click", (event) => {
+        const powerDescription = event.target.id.split("-")[1]
+        if (powerDescription === "flight") {
+            activatePower(flightSection)
+        } else if (powerDescription === "mindreading") {
+            activatePower(mindSection)
+        } else if (powerDescription === "xray") {
+            activatePower(xraySection)
+        }
+    })
 })
 
-activateMindButton.addEventListener("click", () => {
-    activatePower(mindSection)
-})
 
-activateXrayButton.addEventListener("click", () => {
-    activatePower(xraySection)
-})
 
 activateAllButton.addEventListener("click", () => {
     activateAllPowers(allPowers)
